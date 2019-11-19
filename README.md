@@ -1,6 +1,15 @@
-**Microservices**
+[![Build Status](https://travis-ci.org/stackroute/ibm-wave4-oracle.svg?branch=v1.0.1)](https://travis-ci.org/stackroute/ibm-wave4-oracle)
+[![codecov](https://codecov.io/gh/stackroute/ibm-wave4-oracle/branch/v1.0.1/graph/badge.svg)](https://codecov.io/gh/stackroute/ibm-wave4-oracle)
+![](https://img.shields.io/codecov/c/github/stackroute/ibm-wave4-oracle/v1.0.1.svg?style=flat)
 
-Microservices, aka Microservice Architecture, is an architectural style that structures an application as a collection of small autonomous services, modeled around a business domain. Microservices Representation. In microservice architecture, each service is self-contained and implements a single business capability.
+![](https://img.shields.io/github/issues/stackroute/ibm-wave4-oracle.svg?style=popout)
 
-![alt text](https://dzone.com/storage/temp/8625488-screen-shot-2018-03-27-at-43830-pm.png)
-![alt text](https://optisolcdn-wpengine.netdna-ssl.com/wp-content/uploads/MSArchitech.png)
+![](https://img.shields.io/github/contributors/stackroute/ibm-wave4-oracle.svg?style=popout)
+![](https://img.shields.io/github/last-commit/stackroute/ibm-wave4-oracle/v1.0.1.svg?style=popout)
+
+![](https://img.shields.io/github/repo-size/stackroute/ibm-wave4-oracle.svg?style=popout)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+****Running the System****
+
+Run ```mvn clean compile package``` on all the services
