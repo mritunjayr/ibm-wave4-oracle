@@ -3,7 +3,13 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'mvn --version'
+        sh 'mvn compile package install'
+      }
+    }
+
+    stage('test') {
+      steps {
+        junit(allowEmptyResults: true, testResults: '**/target/*.xml')
       }
     }
 
