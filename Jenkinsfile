@@ -8,19 +8,8 @@ pipeline {
     }
 
     stage('Analysis') {
-      parallel {
-        stage('Analysis') {
-          steps {
-            sh 'mvn -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs'
-          }
-        }
-
-        stage('Test-resport') {
-          steps {
-            sh 'junit \'**/target/surefire-reports/TEST-*.xml\''
-          }
-        }
-
+      steps {
+        sh 'mvn -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs'
       }
     }
 
