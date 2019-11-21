@@ -3,19 +3,13 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'mvn compile install -DskipTests'
+        sh 'mvn --batch-mode -V -U -e clean verify package -Dsurefire.useFile=false -Dmaven.test.failure.ignore'
       }
     }
 
-    stage('test') {
+    stage('Analysis') {
       steps {
-        junit(allowEmptyResults: true, testResults: '**/target/*.xml')
-      }
-    }
-
-    stage('check') {
-      steps {
-        sh 'mvn checkstyle:checkstyle'
+        sh 'mvn --batch-mode -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs'
       }
     }
 
