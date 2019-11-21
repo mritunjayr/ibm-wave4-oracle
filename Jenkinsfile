@@ -1,18 +1,14 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.3.3'
-            args '-v /root/.m2:/root/.m2'
-        }
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        sh 'mvn --version'
+      }
     }
-    options {
-        skipStagesAfterUnstable()
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn --version'
-            }
-        }
-    }
+
+  }
+  options {
+    skipStagesAfterUnstable()
+  }
 }
