@@ -1,18 +1,30 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.3.3'
-            args '-v /root/.m2:/root/.m2'
-        }
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        sh 'mvn -DskipTests -V -U -e clean verify package -Dsurefire.useFile=false -Dmaven.test.failure.ignore'
+      }
     }
-    options {
-        skipStagesAfterUnstable()
+
+    stage('Analysis') {
+      steps {
+        sh 'mvn -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs'
+      }
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn --version'
-            }
-        }
+
+  }
+  post {
+    always {
+      recordIssues(enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()])
+      recordIssues(enabledForFailure: true, tool: checkStyle())
+      recordIssues(enabledForFailure: true, tool: spotBugs())
+      recordIssues(enabledForFailure: true, tool: cpd(pattern: '**/target/cpd.xml'))
+      recordIssues(enabledForFailure: true, tool: pmdParser(pattern: '**/target/pmd.xml'))
     }
+
+  }
+  options {
+    skipStagesAfterUnstable()
+  }
 }
