@@ -2,8 +2,19 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      steps {
-        sh 'mvn compile package install'
+      parallel {
+        stage('Build') {
+          steps {
+            sh 'mvn compile install -DskipTests'
+          }
+        }
+
+        stage('Check') {
+          steps {
+            sh 'mvn checkstyle:checkstyle'
+          }
+        }
+
       }
     }
 
