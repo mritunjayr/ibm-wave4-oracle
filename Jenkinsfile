@@ -3,13 +3,13 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'mvn  -DskipTests -V -U -e clean verify package -Dsurefire.useFile=false -Dmaven.test.failure.ignore'
+        sh 'mvn -DskipTests -V -U -e clean verify package -Dsurefire.useFile=false -Dmaven.test.failure.ignore'
       }
     }
 
     stage('Analysis') {
       steps {
-        sh 'mvn  -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd  spotbugs:spotbugs'
+        sh 'mvn -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs'
       }
     }
 
