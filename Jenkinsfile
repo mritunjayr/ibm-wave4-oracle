@@ -8,15 +8,25 @@ pipeline {
     }
 
     stage('Analysis') {
-      steps {
-        sh 'mvn -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs'
+      parallel {
+        stage('Analysis') {
+          steps {
+            sh 'mvn -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd spotbugs:spotbugs'
+          }
+        }
+
+        stage('Test-resport') {
+          steps {
+            sh 'junit \'**/target/surefire-reports/TEST-*.xml\''
+          }
+        }
+
       }
     }
 
   }
   post {
     always {
-      junit '**/target/surefire-reports/TEST-*.xml'
       recordIssues(enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc()])
       recordIssues(enabledForFailure: true, tool: checkStyle())
       recordIssues(enabledForFailure: true, tool: spotBugs())
