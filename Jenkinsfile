@@ -9,7 +9,7 @@ pipeline {
 
     stage('Analysis') {
       steps {
-        sh 'mvn  -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd findbugs:findbugs spotbugs:spotbugs'
+        sh 'mvn  -V -U -e checkstyle:checkstyle pmd:pmd pmd:cpd  spotbugs:spotbugs'
       }
     }
 
